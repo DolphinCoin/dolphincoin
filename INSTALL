@@ -1,0 +1,9 @@
+Building DolphinCoin
+
+See doc/readme-qt.rst for instructions on building DolphinCoin QT,
+the intended-for-end-users, nice-graphical-interface, reference
+implementation of DolphinCoin.
+
+See doc/build-*.txt for instructions on building DolphinCoind,
+the intended-for-services, no-graphical-interface, reference
+implementation of DolphinCoin.
