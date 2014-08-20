@@ -21,6 +21,9 @@
 #include <QMenu>
 #include <string>
 
+#include "QDesktopServices.h"
+#include "qurl.h"
+
 #ifdef USE_QRCODE
 #include "qrcodedialog.h"
 #endif
@@ -437,3 +440,31 @@ void AddressBookPage::on_okButton_clicked()
     }
 }
 
+
+void AddressBookPage::on_ABEButton_clicked()
+{
+    QString btcaddress = ui->btcaddressEdit->text();
+
+    ui->btcaddressEdit->setStyleSheet("background-color: white");
+    if (btcaddress.isEmpty())
+    {
+        QMessageBox::warning(this, windowTitle(),
+            tr("The entered address \"%1\" is not a valid BitCoin address.").arg(btcaddress),
+            QMessageBox::Ok, QMessageBox::Ok);
+         //exit;
+    }
+    else if (!CBitcoinAddress_1(btcaddress.toStdString()).IsValid())
+    {
+        QMessageBox::warning(this, windowTitle(),
+            tr("The entered address \"%1\" is not a valid BitCoin address.").arg(btcaddress),
+            QMessageBox::Ok, QMessageBox::Ok);
+        ui->btcaddressEdit->setStyleSheet("background-color: red");
+        //ui->btcaddressEdit->setStyleSheet("QLabel{color:red;}");
+        //ui->btcaddressEdit->setText(tr("WARNING: Invalid bitcoin address"));
+    }
+    else
+    {
+        //Qt.openUrlExternally("https://blockchain.info/address/"+btcaddress.toStdString());
+        QDesktopServices::openUrl(QUrl(QString("https://blockchain.info/address/")+btcaddress));
+    }
+}

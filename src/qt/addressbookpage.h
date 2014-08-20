@@ -79,6 +79,8 @@ private slots:
 
     void on_okButton_clicked();
 
+    void on_ABEButton_clicked();
+
 signals:
     void signMessage(QString addr);
     void verifyMessage(QString addr);
